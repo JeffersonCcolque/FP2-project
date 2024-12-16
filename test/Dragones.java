@@ -1,5 +1,5 @@
 
-package test2;
+package test;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -7,11 +7,11 @@ import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-public class Dragon {
+public class Dragones {
     private int ataque;
     private int vida;
     
-    public Dragon(){
+    public Dragones(){
         
     }
     

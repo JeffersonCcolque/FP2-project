@@ -1,8 +1,7 @@
-package Principal;
+package test;
+
 import java.awt.*;
 import javax.swing.*;
-
-import Dragon;
 
 import java.awt.event.*;
 
@@ -42,7 +41,7 @@ public class Cuadros extends JFrame{
         ataque.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                Dragon dr = new Dragon();
+                Dragones dr = new Dragones();
                 panel3.setVisible(false);
                 panelprincipal.add(dr.panel(), BorderLayout.SOUTH);
                 dr.panel().setPreferredSize(new Dimension(getWidth(), 150));
