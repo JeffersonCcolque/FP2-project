@@ -4,5 +4,23 @@ public class planta extends Dragon{
         super(nombre, elemento, vida, potencia, potencia, potencia);
         //TODO Auto-generated constructor stub
     }
+     public planta() {
+        super("Dragón de Planta");
+    }
+
+    @Override
+    public String[] getAtaques() {
+        return new String[]{"", "", " "};
+    }
+
+    @Override
+    public String[] getDefensas() {
+        return new String[]{"  ", "  ", " "};
+    }
+
+    @Override
+    public String[] getPotencias() {
+        return new String[]{" ", " ", "  "};
+    }
     
 }

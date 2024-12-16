@@ -5,4 +5,23 @@ public class electrico extends Dragon {
         //TODO Auto-generated constructor stub
     }
     
+    public electrico() {
+        super("Dragón Electrico");
+    }
+
+    @Override
+    public String[] getAtaques() {
+        return new String[]{"", "", " "};
+    }
+
+    @Override
+    public String[] getDefensas() {
+        return new String[]{"  ", "  ", " "};
+    }
+
+    @Override
+    public String[] getPotencias() {
+        return new String[]{" ", " ", "  "};
+    }
+    
 }

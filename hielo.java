@@ -5,4 +5,23 @@ public class hielo extends Dragon{
         //TODO Auto-generated constructor stub
     }
     
+    public hielo() {
+        super("Dragón de Hielo");
+    }
+
+    @Override
+    public String[] getAtaques() {
+        return new String[]{"", "", " "};
+    }
+
+    @Override
+    public String[] getDefensas() {
+        return new String[]{"  ", "  ", " "};
+    }
+
+    @Override
+    public String[] getPotencias() {
+        return new String[]{" ", " ", "  "};
+    }
+    
 }
