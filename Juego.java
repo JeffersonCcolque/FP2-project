@@ -3,12 +3,13 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class Juego extends JFrame {
-    private Dragon[] dragones = { new fuego(), new agua(), new tierra() };
+    private Dragon[] equipoJugador1, equipoJugador2;
     private Dragon dragonJugador1, dragonJugador2;
     private int turnoJugador = 1;
 
     private JLabel infoLabel;
     private JPanel buttonPanel;
+    private JProgressBar barraVidaJ1, barraVidaJ2;
 
     public Juego() {
         setTitle("Dragon City - PvP");
@@ -22,17 +23,37 @@ public class Juego extends JFrame {
         JPanel imagenes = new JPanel(new FlowLayout(FlowLayout.CENTER));
         imagenes.setBackground(Color.red);
         add(imagenes, BorderLayout.CENTER);
+        
+        barraVidaJ1 = new JProgressBar(0, 100);
+        barraVidaJ2 = new JProgressBar(0, 100);
+        barraVidaJ1.setStringPainted(true);
+        barraVidaJ2.setStringPainted(true);
+        barraVidaJ1.setForeground(Color.GREEN);
+        barraVidaJ2.setForeground(Color.GREEN);
+
+        JPanel vidaPanel = new JPanel(new GridLayout(1, 2));
+        vidaPanel.add(new JLabel("Jugador 1: "));
+        vidaPanel.add(barraVidaJ1);
+        vidaPanel.add(new JLabel("Jugador 2: "));
+        vidaPanel.add(barraVidaJ2);
+        add(vidaPanel, BorderLayout.CENTER);
 
         buttonPanel = new JPanel(new GridLayout(2, 2));
+        inicializarEquipos();
         inicializarBotonesPrincipales();
         add(buttonPanel, BorderLayout.SOUTH);
         buttonPanel.setPreferredSize(new Dimension(getWidth(), 150));
 
-        dragonJugador1 = dragones[0];
-        dragonJugador2 = dragones[1];
         actualizarInfo();
         
         setVisible(true);
+    }
+    
+    private void inicializarEquipos() {
+        equipoJugador1 = new Dragon[]{new fuego(), new agua(), new tierra()};
+        equipoJugador2 = new Dragon[]{new agua(), new tierra(), new fuego()};
+        dragonJugador1 = equipoJugador1[0];
+        dragonJugador2 = equipoJugador2[0];
     }
 
     private void inicializarBotonesPrincipales() {
@@ -61,10 +82,11 @@ public class Juego extends JFrame {
                             tipo.equals("defensa") ? dragonActual.getDefensas() : dragonActual.getPotencias();
 
         buttonPanel.removeAll();
-        for (String opcion : opciones) {
-            JButton opcionBtn = new JButton(opcion);
+        for (int i = 0; i < opciones.length; i++) {
+            int nivel = i; // Nivel del botón actual
+            JButton opcionBtn = new JButton(opciones[i]);
             opcionBtn.addActionListener(e -> {
-                infoLabel.setText("Jugador " + turnoJugador + " usó: " + opcion);
+                realizarAccion(tipo, nivel);
                 cambiarTurno();
             });
             buttonPanel.add(opcionBtn);
@@ -78,29 +100,91 @@ public class Juego extends JFrame {
         buttonPanel.repaint();
     }
 
+    private void realizarAccion(String tipo, int nivel) {
+        Dragon atacante = obtenerDragonActual();
+        Dragon oponente = obtenerDragonOponente();
+
+        switch (tipo) {
+            case "ataque":
+                switch (nivel) {
+                    case 0: oponente.vida -=10;
+                        System.out.print(oponente.vida);
+                        break;
+                    case 1: oponente.vida -=20;
+                        System.out.print(oponente.vida);
+                        break;
+                    case 2: oponente.vida -=30;
+                        System.out.print(oponente.vida);
+                        break;
+                };
+                for(String elemento:atacante.getFortalezas()){
+                    if(oponente.elemento.equals(elemento)){
+                        oponente.vida -=10;
+                    }
+                }
+                for(String elemento:atacante.getDebilidades()){
+                    if(oponente.elemento.equals(elemento)){
+                        oponente.vida +=10;
+                    }
+                }
+                infoLabel.setText("¡" + atacante.nombre + " usó un ataque de nivel " + (nivel + 1) + " e hizo de daño!");
+                break;
+            case "defensa":
+                switch (nivel) {
+                    case 0: atacante.dfns +=10;
+                        System.out.print(atacante.vida);
+                        break;
+                    case 1: atacante.dfns +=20;
+                        System.out.print(atacante.vida);
+                        break;
+                    case 2: atacante.dfns +=30;
+                        System.out.print(atacante.vida);
+                        break;
+                };
+                infoLabel.setText("¡" + atacante.nombre + " aumentó su defensa en puntos!");
+                break;
+            case "potencia":
+                switch (nivel) {
+                    case 0: atacante.vida +=20;
+                        System.out.print(atacante.vida);
+                        break;
+                    case 1: atacante.atk +=20;
+                        System.out.print(atacante.atk);
+                        break;
+                    case 2: atacante.vida +=10;
+                        atacante.atk +=10;
+                        break;
+                };
+                infoLabel.setText("¡" + atacante.nombre + " aumentó su ataque en puntos!");
+                break;
+        }
+    }
+
     private void cambiarDragon() {
+        Dragon[] equipoActual = turnoJugador == 1 ? equipoJugador1 : equipoJugador2;
         JFrame cambioFrame = new JFrame("Cambiar Dragón - Jugador " + turnoJugador);
         cambioFrame.setSize(300, 150);
-        cambioFrame.setLayout(new GridLayout(1, 3));
+        cambioFrame.setLayout(new GridLayout(1, equipoActual.length));
 
-        for (Dragon dragon : dragones) {
+        for (Dragon dragon : equipoActual) {
             JButton dragonBtn = new JButton(dragon.nombre);
             dragonBtn.addActionListener(e -> {
                 if (turnoJugador == 1) dragonJugador1 = dragon;
                 else dragonJugador2 = dragon;
-
                 infoLabel.setText("Jugador " + turnoJugador + " cambió a: " + dragon.nombre);
                 cambioFrame.dispose();
                 cambiarTurno();
             });
             cambioFrame.add(dragonBtn);
         }
-
         cambioFrame.setVisible(true);
     }
-
+    
     private Dragon obtenerDragonActual() {
         return turnoJugador == 1 ? dragonJugador1 : dragonJugador2;
+    }
+    private Dragon obtenerDragonOponente() {
+        return turnoJugador == 1 ? dragonJugador2 : dragonJugador1;
     }
 
     private void cambiarTurno() {
@@ -109,8 +193,9 @@ public class Juego extends JFrame {
     }
 
     private void actualizarInfo() {
-        String dragonActual = obtenerDragonActual().nombre;
-        infoLabel.setText("Turno del Jugador " + turnoJugador + " - Dragón: " + dragonActual);
+        barraVidaJ1.setValue(dragonJugador1.vida);
+        barraVidaJ2.setValue(dragonJugador2.vida);
+        infoLabel.setText("Turno del Jugador " + turnoJugador + " - Dragón: " + obtenerDragonActual().nombre);
         inicializarBotonesPrincipales();
     }
 
