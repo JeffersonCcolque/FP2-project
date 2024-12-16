@@ -1,7 +1,9 @@
-package test2;
-
+package Principal;
 import java.awt.*;
 import javax.swing.*;
+
+import Dragon;
+
 import java.awt.event.*;
 
 public class Cuadros extends JFrame{
