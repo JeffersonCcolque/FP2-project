@@ -1,27 +1,57 @@
 public class fuego extends Dragon {
 
-    public fuego(String nombre, String elemento, int vida, int[] ataque, int[] defensa, int[] potencia) {
-        super(nombre, elemento, vida, ataque, ataque, ataque);
+    private String img;
+
+    public fuego(String nombre, int vida, Object[][] ataques, Object[][] defensa, Object[][] potencias,String img) {
+        super(nombre, vida, ataques, defensa, potencias);
+        this.img = img;
     }
     
-     public fuego() {
-        super("Dragón de Fuego");
-        vida = 100;
-        atk = 20;
-        dfns = 10;
+    // Métodos getter y setter para los atributos
+    public String getNombre() {
+        return nombre;
     }
-    @Override
-    public String[] getAtaques() {
-        return new String[]{"Llamarada", "Explosión", "Fuego Cruzado"};
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     @Override
-    public String[] getDefensas() {
-        return new String[]{"Escudo de Fuego", "Muro de Lava", "Ceniza Protectora"};
+    public String getImagen(){
+        return img;
     }
 
-    @Override
-    public String[] getPotencias() {
-        return new String[]{"Fuego Potenciado", "Calor Extremo", "Rugido de Fuego"};
+    public int getVida() {
+        return vida;
+    }
+
+    public void setVida(int vida) {
+        this.vida = vida;
+    }
+
+    public Object[][] getDefensa() {
+        return ataques;
+    }
+
+    public void setDefensa(Object[][] ataques) {
+        this.ataques = ataques;
+    }
+
+    
+    public Object[][] getPotencia() {
+        return ataques;
+    }
+
+    public void setPotencia(Object[][] ataques) {
+        this.ataques = ataques;
+    }
+
+    
+    public Object[][] getAtaques() {
+        return ataques;
+    }
+
+    public void setAtaques(Object[][] ataques) {
+        this.ataques = ataques;
     }
 }

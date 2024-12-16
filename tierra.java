@@ -1,25 +1,55 @@
 
 public class tierra extends Dragon{
-    public tierra(String nombre, String elemento, int vida, int[] ataque, int[] defensa, int[] potencia) {
-        super(nombre, elemento, vida, potencia, potencia, potencia);
+    private String img;
+    public tierra(String nombre, int vida, Object[][] ataques, Object[][] defensa, Object[][] potencias, String img) {
+        super(nombre, vida, ataques, defensa, potencias);
+        this.img = img;
+    }
+
+    // Métodos getter y setter para los atributos
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getImagen(){
+        return img;
     }
     
-    public tierra() {
-        super("Dragón de Tierra");
+    public int getVida() {
+        return vida;
     }
 
-    @Override
-    public String[] getAtaques() {
-        return new String[]{"", "", " "};
+    public void setVida(int vida) {
+        this.vida = vida;
     }
 
-    @Override
-    public String[] getDefensas() {
-        return new String[]{"  ", "  ", " "};
+    public Object[][] getDefensa() {
+        return ataques;
     }
 
-    @Override
-    public String[] getPotencias() {
-        return new String[]{" ", " ", "  "};
+    public void setDefensa(Object[][] ataques) {
+        this.ataques = ataques;
+    }
+
+    
+    public Object[][] getPotencia() {
+        return ataques;
+    }
+
+    public void setPotencia(Object[][] ataques) {
+        this.ataques = ataques;
+    }
+
+    
+    public Object[][] getAtaques() {
+        return ataques;
+    }
+
+    public void setAtaques(Object[][] ataques) {
+        this.ataques = ataques;
     }
 }

@@ -16,28 +16,12 @@ public class principal extends JFrame {
         setSize(600, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null); // Usamos diseño nulo para posicionar los elementos manualmente
-        setResizable(false); // Prevenir redimensionamiento
 
-        // Verificar existencia del archivo de imagen
-        File fondoFile = new File("C:\\Users\\jefer\\Documents\\Nueva carpeta (2)\\FP2_Proyec\\FP2-project\\img\\fondo.png");
-        ImageIcon fondoIcon;
+        JLabel lblPerfil = new JLabel();
+        ImageIcon perfilIcon = redimensionarImagen(new ImageIcon("FP2-project\\img\\fondo_pant.jpg"),600,500); // Ruta de la imagen de perfil
+        lblPerfil.setIcon(perfilIcon);
+        lblPerfil.setBounds(0, 0, 600, 500); // Colocar la imagen centrada en la parte superior
         
-        try {
-            if (fondoFile.exists()) {
-                fondoIcon = redimensionarImagen(new ImageIcon(fondoFile.getPath()), 500, 400);
-            } else {
-                // Imagen de respaldo si no se encuentra el archivo
-                fondoIcon = new ImageIcon(getClass().getResource("/recursos/fondo_defecto.png"));
-            }
-        } catch (Exception e) {
-            // Manejar caso de error de imagen
-            System.err.println("Error al cargar la imagen de fondo: " + e.getMessage());
-            fondoIcon = new ImageIcon(); // Icono vacío
-        }
-
-        // Crear fondo de pantalla
-        JLabel fondoLabel = new JLabel(fondoIcon);
-        fondoLabel.setBounds(50, 50, 600, 500); // Aseguramos que cubra todo el marco
 
         // Creación de botones con mejoras de estilo
         JButton eleg = new JButton("Elegir Dragones");
@@ -59,7 +43,7 @@ public class principal extends JFrame {
         // Añadir componentes
         add(eleg);
         add(rand);
-        add(fondoLabel); // Fondo al final para que quede detrás
+        add(lblPerfil);
 
         // Hacer visible el marco
         setLocationRelativeTo(null); // Centrar en pantalla
@@ -72,13 +56,14 @@ public class principal extends JFrame {
         return new ImageIcon(nuevaImagen);
     }
 
-    public void dragRandom() {
-        // Implementar lógica de selección aleatoria de dragones
-        System.out.println("Seleccionando dragones aleatorios");
+    public void dragRandom() {    
+        SwingUtilities.invokeLater(() -> new DragonesRand());
     }
 
     public void elegir() {
-        // Implementar lógica de selección manual de dragones
-        System.out.println("Eligiendo dragones");
-    }
+    // Abrir la pantalla de selección de dragones
+    SwingUtilities.invokeLater(() -> new Elecciones());
+    dispose();
+    }   
+
 }

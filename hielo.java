@@ -1,27 +1,54 @@
 public class hielo extends Dragon{
-
-    public hielo(String nombre, String elemento, int vida, int[] ataque, int[] defensa, int[] potencia) {
-        super(nombre, elemento, vida, potencia, potencia, potencia);
-        //TODO Auto-generated constructor stub
+    private String img;
+    public hielo(String nombre, int vida, Object[][] ataques, Object[][] defensa, Object[][] potencias, String img) {
+        super(nombre, vida, ataques, defensa, potencias);
+        this.img = img;
     }
+
+    // Métodos getter y setter para los atributos
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getImagen(){
+        return img ;
+    }
+    public int getVida() {
+        return vida;
+    }
+
+    public void setVida(int vida) {
+        this.vida = vida;
+    }
+
+    public Object[][] getDefensa() {
+        return ataques;
+    }
+
+    public void setDefensa(Object[][] ataques) {
+        this.ataques = ataques;
+    }
+
     
-    public hielo() {
-        super("Dragón de Hielo");
+    public Object[][] getPotencia() {
+        return ataques;
     }
 
-    @Override
-    public String[] getAtaques() {
-        return new String[]{"", "", " "};
+    public void setPotencia(Object[][] ataques) {
+        this.ataques = ataques;
     }
 
-    @Override
-    public String[] getDefensas() {
-        return new String[]{"  ", "  ", " "};
+    
+    public Object[][] getAtaques() {
+        return ataques;
     }
 
-    @Override
-    public String[] getPotencias() {
-        return new String[]{" ", " ", "  "};
+    public void setAtaques(Object[][] ataques) {
+        this.ataques = ataques;
     }
     
 }

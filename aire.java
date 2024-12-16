@@ -1,22 +1,8 @@
-public class Dragon {
-    protected String nombre;
-    protected int vida;
-    protected Object[][] ataques;
-    protected Object[][] defensa;
-    protected Object[][] potencias;
-
-    // Constructor con todos los atributos
-    public Dragon(String nombre, int vida, Object[][] ataques, Object[][] defensa, Object[][] potencias) {
-        this.nombre = nombre;
-        this.vida = vida;
-        this.ataques = ataques;
-        this.defensa = defensa;
-        this.potencias = potencias;
-    }
-
-    // Constructor con solo el nombre
-    public Dragon(String nombre) {
-        this.nombre = nombre;
+public class aire extends Dragon {
+    private String img;
+    public aire(String nombre, int vida, Object[][] ataques, Object[][] defensa, Object[][] potencias, String img) {
+        super(nombre, vida, ataques, defensa, potencias);
+        this.img = img;
     }
 
     // Métodos getter y setter para los atributos
@@ -28,6 +14,10 @@ public class Dragon {
         this.nombre = nombre;
     }
 
+    public String getImagen(){
+        return img ;
+    }
+    
     public int getVida() {
         return vida;
     }
@@ -61,9 +51,5 @@ public class Dragon {
     public void setAtaques(Object[][] ataques) {
         this.ataques = ataques;
     }
-
-    public String getImagen() {
-        return "error";
-    }
-
+    
 }
