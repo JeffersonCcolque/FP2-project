@@ -2,13 +2,14 @@ public class fuego extends Dragon {
 
     public fuego(String nombre, String elemento, int vida, int[] ataque, int[] defensa, int[] potencia) {
         super(nombre, elemento, vida, ataque, ataque, ataque);
-        //TODO Auto-generated constructor stub
     }
     
      public fuego() {
         super("Dragón de Fuego");
+        vida = 100;
+        atk = 20;
+        dfns = 10;
     }
-
     @Override
     public String[] getAtaques() {
         return new String[]{"Llamarada", "Explosión", "Fuego Cruzado"};
